@@ -38,7 +38,7 @@ export default function LoginScreen() {
           behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
         >
           <ImageBackground
-            source={require('../assets/images/BG.png')}
+            source={require('../assets/image/BG.jpg')}
             style={styles.imageBg}
           >
             <View style={styles.logBg}>

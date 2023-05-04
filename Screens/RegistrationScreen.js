@@ -6,6 +6,8 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
