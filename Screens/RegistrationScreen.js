@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,14 @@ import { AntDesign } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 
 export const RegistrationScreen = () => {
+  const [login, setLogin] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const onLogin = () => {
+    Alert.alert('Credentials', `${login} + ${email} + ${pass}`)
+  }
+
   const [fonts] = useFonts({
     RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
     RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
@@ -27,44 +35,62 @@ export const RegistrationScreen = () => {
         resizeMode="cover"
         style={styles.image}
       >
-        <View style={styles.form}>
-          <View style={styles.wrapImage}>
-            <AntDesign
-              name="pluscircleo"
-              size={25}
-              color="#FF6C00"
-              backgroundColor="white"
-              style={styles.buttonAddPhoto}
-            />
-          </View>
-          <Text style={styles.title}>Регістрація</Text>
-          <TextInput
-            style={{
-              ...styles.input,
-            }}
-            placeholder="Логін"
-          />
-          <TextInput
-            style={{
-              ...styles.input,
-            }}
-            placeholder="Адреса електронної пошти"
-          />
-
-          <View style={styles.inputPass}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.form}>
+            <View style={styles.wrapImage}>
+              <AntDesign
+                name="pluscircleo"
+                size={25}
+                color="#FF6C00"
+                backgroundColor="white"
+                style={styles.buttonAddPhoto}
+              />
+            </View>
+            <Text style={styles.title}>Регістрація</Text>
             <TextInput
               style={{
                 ...styles.input,
               }}
-              placeholder="Пароль"
+              placeholder="Логін"
+              value={login}
+              onChangeText={setLogin}
             />
-            <Text style={styles.textInput}> Показати </Text>
+            <TextInput
+              style={{
+                ...styles.input,
+              }}
+              placeholder="Адреса електронної пошти"
+              value={email}
+              onChangeText={setEmail}
+              autoComplete="email"
+            />
+            <KeyboardAvoidingView
+              behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+            >
+              <View style={styles.inputPass}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                  }}
+                  placeholder="Пароль"
+                  value={password}
+                  onChangeText={setPassword}
+                  autoComplete="password"
+                />
+
+                <Text style={styles.textInput}> Показати </Text>
+              </View>
+            </KeyboardAvoidingView>
+            <TouchableOpacity
+              style={styles.button}
+              title="Зареєструватись"
+              onPress={onLogin}
+            >
+              <Text style={styles.buttonText}> Зареєструватись </Text>
+            </TouchableOpacity>
+            <Text style={styles.textYes}>Вже існує акаунт? Ввійти</Text>
           </View>
-          <TouchableOpacity style={styles.button} title="Зареєструватись">
-            <Text style={styles.buttonText}> Зареєструватись </Text>
-          </TouchableOpacity>
-          <Text style={styles.textYes}>Вже існує акаунт? Ввійти</Text>
-        </View>
+        </TouchableWithoutFeedback>
       </ImageBackground>
     </View>
   )
@@ -75,6 +101,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'RobotoRegular',
+    // alignItems: "center",
+    // justifyContent: "flex-end",
+    // paddingBottom: 30
   },
   image: {
     width: 400,
