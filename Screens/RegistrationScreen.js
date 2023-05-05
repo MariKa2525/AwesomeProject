@@ -18,15 +18,30 @@ export const RegistrationScreen = () => {
   const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const onLogin = () => {
-    console.alert(`${login} + ${email} + ${pass}`)
-  }
+  const [onFocus, setOnFocus] = useState('initial')
 
   const [fonts] = useFonts({
     RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
     RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
   })
+
+  const onLogin = () => {
+    console.log(`${login} + ${email} + ${password}`)
+    resetForm()
+  }
+
+  const customOnFocus = (input) => {
+    setOnFocus((prev) => ({ ...prev, [input]: true }))
+  }
+  const customOnBlur = (input) => {
+    setOnFocus((prev) => ({ ...prev, [input]: false }))
+  }
+
+  const resetForm = () => {
+    setLogin('')
+    setEmail('')
+    setPassword('')
+  }
 
   if (!fonts) {
     return null
