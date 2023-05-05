@@ -20,7 +20,7 @@ export const RegistrationScreen = () => {
   const [password, setPassword] = useState('')
 
   const onLogin = () => {
-    Alert.alert('Credentials', `${login} + ${email} + ${pass}`)
+    console.alert(`${login} + ${email} + ${pass}`)
   }
 
   const [fonts] = useFonts({
@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'RobotoRegular',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingBottom: 30,
+    // alignItems: 'center',
+    // justifyContent: 'flex-end',
+    paddingBottom: 10,
   },
   image: {
     width: 400,
