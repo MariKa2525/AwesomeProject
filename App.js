@@ -28,9 +28,9 @@ export default function App() {
             options={{
               title: 'Start screen',
               headerStyle: {
-                // boxShadow: 0 0.5 0 rgba(0, 0, 0, 0.3),
-                // backdropFilter: blur(13.5914),
-                backgroundColor: '#f4511e',
+                boxShadow: '0 0.5 0 rgba(0, 0, 0, 0.3)',
+                backdropFilter: 'blur(13.5914)',
+                // backgroundColor: '#f4511e',
               },
               headerTintColor: '#212121',
               headerTitleStyle: {
