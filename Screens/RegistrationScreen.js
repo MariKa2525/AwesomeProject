@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
@@ -104,9 +105,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'RobotoRegular',
-    // alignItems: "center",
-    // justifyContent: "flex-end",
-    // paddingBottom: 30
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 30,
   },
   image: {
     width: 400,
