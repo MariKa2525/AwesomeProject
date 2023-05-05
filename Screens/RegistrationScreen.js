@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { createRef, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -18,7 +18,6 @@ export const RegistrationScreen = () => {
   const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [onFocus, setOnFocus] = useState('initial')
 
   const [fonts] = useFonts({
     RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
@@ -28,13 +27,6 @@ export const RegistrationScreen = () => {
   const onLogin = () => {
     console.log(`${login} + ${email} + ${password}`)
     resetForm()
-  }
-
-  const customOnFocus = (input) => {
-    setOnFocus((prev) => ({ ...prev, [input]: true }))
-  }
-  const customOnBlur = (input) => {
-    setOnFocus((prev) => ({ ...prev, [input]: false }))
   }
 
   const resetForm = () => {
@@ -67,17 +59,13 @@ export const RegistrationScreen = () => {
             </View>
             <Text style={styles.title}>Регістрація</Text>
             <TextInput
-              style={{
-                ...styles.input,
-              }}
+              style={styles.input}
               placeholder="Логін"
               value={login}
               onChangeText={setLogin}
             />
             <TextInput
-              style={{
-                ...styles.input,
-              }}
+              style={styles.input}
               placeholder="Адреса електронної пошти"
               value={email}
               onChangeText={setEmail}
@@ -88,9 +76,7 @@ export const RegistrationScreen = () => {
             >
               <View style={styles.inputPass}>
                 <TextInput
-                  style={{
-                    ...styles.input,
-                  }}
+                  style={styles.input}
                   placeholder="Пароль"
                   value={password}
                   onChangeText={setPassword}
@@ -176,6 +162,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
     color: '#212121',
     fontSize: 16,
+    focus: {
+      color: '#FF6C00',
+    },
+    hover: {
+      color: '#FF6C00',
+    },
+    active: {
+      color: '#FF6C00',
+    },
   },
   textInput: {
     position: 'absolute',

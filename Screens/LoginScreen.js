@@ -14,21 +14,21 @@ import {
 } from 'react-native'
 import { useFonts } from 'expo-font'
 
-export default function LoginScreen() {
+export const LoginScreen = () => {
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
+
   const [fontsLoaded] = useFonts({
     RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
     RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
   })
 
-  if (!fontsLoaded) {
-    return null
-  }
-
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
-
   const onLogin = () => {
     Alert.alert('Credentials', `${email} + ${pass}`)
+  }
+
+  if (!fontsLoaded) {
+    return null
   }
 
   return (

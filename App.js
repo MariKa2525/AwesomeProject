@@ -4,12 +4,14 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { RegistrationScreen } from './Screens/RegistrationScreen'
 import { LoginScreen } from './Screens/LoginScreen'
+import { ProfileScreen } from './Screens/ProfileScreen'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <RegistrationScreen />
+      {/* <RegistrationScreen /> */}
       {/* <LoginScreen /> */}
+      <ProfileScreen />
       <StatusBar style="auto" />
     </View>
   )
