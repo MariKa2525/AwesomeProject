@@ -13,8 +13,10 @@ import {
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native'
 
 export const RegistrationScreen = () => {
+  const navigation = useNavigation()
   const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -93,7 +95,12 @@ export const RegistrationScreen = () => {
             >
               <Text style={styles.buttonText}> Зареєструватись </Text>
             </TouchableOpacity>
-            <Text style={styles.textYes}>Вже існує акаунт? Ввійти</Text>
+            <Text
+              style={styles.textYes}
+              onPress={() => navigation.navigate('LoginScreen')}
+            >
+              Вже існує акаунт? Ввійти
+            </Text>
           </View>
         </TouchableWithoutFeedback>
       </ImageBackground>

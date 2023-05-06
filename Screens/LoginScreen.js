@@ -13,8 +13,10 @@ import {
   Platform,
 } from 'react-native'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native'
 
 export const LoginScreen = () => {
+  const navigation = useNavigation()
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
 
@@ -24,7 +26,10 @@ export const LoginScreen = () => {
   })
 
   const onLogin = () => {
-    Alert.alert('Credentials', `${email} + ${pass}`)
+    console.log('Credentials', `${email} + ${pass}`)
+    setEmail('')
+    setPass('')
+    navigation.navigate('PostsScreen')
   }
 
   if (!fontsLoaded) {
@@ -64,10 +69,15 @@ export const LoginScreen = () => {
                 />
                 <Text style={styles.textInput}> Показати </Text>
               </View>
+
               <TouchableOpacity style={styles.btn} onPress={onLogin}>
                 <Text style={styles.btnText}>Авторизуватися</Text>
               </TouchableOpacity>
-              <Text style={styles.txtForSignUp}>
+
+              <Text
+                style={styles.txtForSignUp}
+                onPress={() => navigation.navigate('RegistrationScreen')}
+              >
                 Немає аккаунта? Зареєструватися
               </Text>
             </View>
