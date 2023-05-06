@@ -19,20 +19,33 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <MainStack.Navigator initialRouteName="CommentsScreen">
+        <MainStack.Navigator initialRouteName="RegistrationScreen">
           <MainStack.Screen
             name="RegistrationScreen"
             component={RegistrationScreen}
+            options={{ headerShown: false }}
           />
-          <MainStack.Screen name="LoginScreen" component={LoginScreen} />
-          <MainStack.Screen name="Home" component={Home} />
+          <MainStack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <MainStack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
           <MainStack.Screen name="PostsScreen" component={PostsScreen} />
           <MainStack.Screen
             name="CreatPostsScreen"
             component={CreatPostsScreen}
           />
+          <MainStack.Screen
+            name="ProfileScreen"
+            component={ProfileScreen}
+            options={{ headerShown: false }}
+          />
           <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
-          <MainStack.Screen name="ProfileScreen" component={ProfileScreen} />
         </MainStack.Navigator>
       </NavigationContainer>
     </View>
