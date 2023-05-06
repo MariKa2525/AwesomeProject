@@ -1,20 +1,13 @@
-import React, { createRef, useState } from 'react'
 import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   Image,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
   Keyboard,
-  Platform,
 } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
-import { SimpleLineIcons } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 
 export const CommentsScreen = () => {
@@ -29,12 +22,66 @@ export const CommentsScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.wrap}>
-          <View style={styles.cardImageWrap}>
+        <View style={styles.commentWrap}>
+          <View style={styles.commentImageWrap}>
             <Image
               source={{ uri: 'https://reactjs.org/logo-og.png' }}
-              style={styles.cardImage}
+              style={styles.commentImage}
             />
+          </View>
+          <View style={styles.commentlist}>
+            <View style={styles.commentitem}>
+              <View style={styles.commentAvatarWrap}>
+                <Image
+                  source={require('../assets/image/User.png')}
+                  style={styles.commentAvatar}
+                />
+              </View>
+              <View style={styles.commentTextWrap}>
+                <Text style={styles.commentText}>
+                  "Really love your most recent photo. I’ve been trying to
+                  capture the same thing for a few months and would love some
+                  tips!"
+                </Text>
+                <Text style={styles.commentData}>09 июня, 2020 | 09:14</Text>
+              </View>
+            </View>
+            <View style={styles.commentitem}>
+              <View style={styles.commentTextWrap}>
+                <Text style={styles.commentText}>
+                  "Really love your most recent photo. I’ve been trying to
+                  capture the same thing for a few months and would love some
+                  tips!"
+                </Text>
+                <Text style={styles.commentData}>09 июня, 2020 | 09:14</Text>
+              </View>
+              <View style={styles.commentAvatarWrap}>
+                <Image
+                  source={require('../assets/image/User.png')}
+                  style={styles.commentAvatar}
+                />
+              </View>
+            </View>
+            <View style={styles.commentitem}>
+              <View style={styles.commentAvatarWrap}>
+                <Image
+                  source={require('../assets/image/User.png')}
+                  style={styles.commentAvatar}
+                />
+              </View>
+              <View style={styles.commentTextWrap}>
+                <Text style={styles.commentText}>
+                  "Really love your most recent photo. I’ve been trying to
+                  capture the same thing for a few months and would love some
+                  tips!"
+                </Text>
+                <Text style={styles.commentData}>09 июня, 2020 | 09:14</Text>
+              </View>
+            </View>
+            <TextInput style={styles.input} placeholder="Коментувати..." />
+            <View style={styles.commentIonicons}>
+              <Ionicons name="md-arrow-up-circle" size={34} color="#FF6C00" />
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -47,117 +94,91 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'RobotoRegular',
-    // alignItems: 'center',
-    // justifyContent: 'flex-end',
-    paddingBottom: 10,
   },
-  image: {
-    width: 400,
-    height: 812,
-    resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  wrapImage: {
-    position: 'absolute',
-    width: 120,
-    height: 120,
-    backgroundColor: '#F6F6F6',
-
-    borderRadius: 16,
-    top: -60,
-    left: 141,
-  },
-  buttonAddPhoto: {
-    position: 'absolute',
-    left: 108,
-    top: 80,
-    borderRadius: 12.5,
-  },
-  wrapIonicons: {
-    position: 'absolute',
-    right: 30,
-    top: 18,
-  },
-
-  title: {
-    fontSize: 30,
-    lineHeight: 35,
-    letterSpacing: 0.01,
-    textAlign: 'center',
-    fontFamily: 'RobotoMedium',
-  },
-  wrap: {
-    // marginTop: 33,
+  commentWrap: {
     display: 'flex',
-    gap: 16,
+    gap: 32,
     backgroundColor: '#fff',
-    height: '84%',
     width: '100%',
     paddingHorizontal: 16,
-    paddingTop: 92,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    paddingTop: 32,
   },
-  card: {
-    flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  cardImage: {
+  commentImage: {
     width: 343,
     height: 240,
+    borderRadius: 8,
   },
-  cardImageWrap: {
+  commentImageWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+
+  commentlist: {
+    gap: 24,
+  },
+  commentitem: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 16,
+  },
+  commentAvatarWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  cardText: {
-    marginTop: 8,
-    marginStart: 16,
-    fontSize: 16,
-    lineHeight: 19,
-    letterSpacing: 0.01,
-    textAlign: 'start',
-    fontFamily: 'RobotoMedium',
+  commentAvatar: {
+    width: 28,
+    height: 28,
+    borderRadius: 50,
   },
-  cardInner: {
-    display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    flexDirection: 'row',
-    marginTop: 8,
-  },
-  cardWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
+  commentTextWrap: {
+    backgroundColor: 'rgba(0, 0, 0, 0.03)',
+    borderBottomRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderTopRightRadius: 6,
+    padding: 16,
+    width: 299,
     gap: 8,
-    alignItems: 'center',
-    marginRight: 24,
-    marginStart: 16,
-    justifyContent: 'flex-start',
   },
-  cardWrapperMap: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 4,
-    alignItems: 'center',
-    marginLeft: 90,
-    marginRight: 16,
-    marginStart: 16,
-    // justifyContent: 'flex-end',
+  commentText: {
+    fontFamily: 'RobotoRegular',
+    fontSize: 13,
+    lineHeight: 18,
   },
-  cardNumber: {
+  commentData: {
+    fontFamily: 'RobotoRegular',
+    fontSize: 10,
+    lineHeight: 12,
+    textAlign: 'right',
+    color: '#BDBDBD',
+  },
+  input: {
+    position: 'relative',
+
+    height: 50,
+    width: 343,
+    padding: 16,
+
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: '#E8E8E8',
+    borderEndWidth: 1,
+    backgroundColor: '#F6F6F6',
+    color: '#BDBDBD',
     fontSize: 16,
     lineHeight: 19,
-    letterSpacing: 0.01,
-    fontFamily: 'RobotoMedium',
   },
-  cardLink: {
-    fontSize: 16,
-    lineHeight: 19,
-    letterSpacing: 0.01,
-    fontFamily: 'RobotoMedium',
+  commentIonicons: {
+    position: 'absolute',
+    top: 395,
+    left: 300,
+    textAlign: 'center',
   },
 })
