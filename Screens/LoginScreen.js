@@ -29,7 +29,7 @@ export const LoginScreen = () => {
     console.log('Credentials', `${email} + ${pass}`)
     setEmail('')
     setPass('')
-    navigation.navigate('PostsScreen')
+    navigation.navigate('Home')
   }
 
   if (!fontsLoaded) {
@@ -37,54 +37,52 @@ export const LoginScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        >
-          <ImageBackground
-            source={require('../assets/image/BG.jpg')}
-            style={styles.imageBg}
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View style={styles.container}>
+      {/* <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}> */}
+      <ImageBackground
+        source={require('../assets/image/BG.jpg')}
+        style={styles.imageBg}
+      >
+        <View style={styles.logBg}>
+          <Text style={styles.title}>Авторизація</Text>
+
+          <View style={styles.logForm}>
+            <TextInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+              autoComplete="email"
+              value={email}
+              onChangeText={setEmail}
+            />
+          </View>
+
+          <View style={styles.pass}>
+            <TextInput
+              style={styles.input}
+              placeholder="Пароль"
+              autoComplete="password"
+              value={pass}
+              onChangeText={setPass}
+            />
+            <Text style={styles.textInput}> Показати </Text>
+          </View>
+
+          <TouchableOpacity style={styles.btn} onPress={onLogin}>
+            <Text style={styles.btnText}>Авторизуватися</Text>
+          </TouchableOpacity>
+
+          <Text
+            style={styles.txtForSignUp}
+            onPress={() => navigation.navigate('RegistrationScreen')}
           >
-            <View style={styles.logBg}>
-              <Text style={styles.title}>Авторизація</Text>
-
-              <View style={styles.logForm}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Адреса електронної пошти"
-                  autoComplete="email"
-                  value={email}
-                  onChangeText={setEmail}
-                />
-              </View>
-
-              <View style={styles.pass}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Пароль"
-                  autoComplete="password"
-                  value={pass}
-                  onChangeText={setPass}
-                />
-                <Text style={styles.textInput}> Показати </Text>
-              </View>
-
-              <TouchableOpacity style={styles.btn} onPress={onLogin}>
-                <Text style={styles.btnText}>Авторизуватися</Text>
-              </TouchableOpacity>
-
-              <Text
-                style={styles.txtForSignUp}
-                onPress={() => navigation.navigate('RegistrationScreen')}
-              >
-                Немає аккаунта? Зареєструватися
-              </Text>
-            </View>
-          </ImageBackground>
-        </KeyboardAvoidingView>
-      </View>
-    </TouchableWithoutFeedback>
+            Немає аккаунта? Зареєструватися
+          </Text>
+        </View>
+      </ImageBackground>
+      {/* </KeyboardAvoidingView>                 */}
+    </View>
+    // </TouchableWithoutFeedback>
   )
 }
 
@@ -103,6 +101,7 @@ const styles = StyleSheet.create({
   logBg: {
     paddingHorizontal: 16,
     width: '100%',
+    height: 489,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
