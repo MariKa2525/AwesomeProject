@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'RobotoRegular',
-    // alignItems: 'center',
-    // justifyContent: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingBottom: 10,
   },
   image: {
