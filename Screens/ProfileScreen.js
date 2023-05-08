@@ -56,6 +56,7 @@ export const ProfileScreen = () => {
               />
             </View>
             <Text style={styles.title}>Natali Romanova</Text>
+
             <View style={styles.card}>
               <View style={styles.cardImageWrap}>
                 <Image
@@ -86,7 +87,12 @@ export const ProfileScreen = () => {
                     size={24}
                     color="black"
                   />
-                  <Text style={styles.cardLink}>Ukraine</Text>
+                  <Text
+                    style={styles.cardLink}
+                    onPress={() => navigation.navigate('MapScreen')}
+                  >
+                    Ukraine
+                  </Text>
                 </View>
               </View>
             </View>
