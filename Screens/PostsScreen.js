@@ -17,7 +17,7 @@ export const PostsScreen = () => {
       <View style={styles.wrapUser}>
         <Image
           style={styles.avatarUser}
-          source={require('../assets/image/User.png')}
+          source={require('../assets/images/User.png')}
         />
         <View style={styles.wrapUserData}>
           <Text style={styles.titleUser}>Natali Romanova</Text>

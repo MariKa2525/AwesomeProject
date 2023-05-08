@@ -32,7 +32,7 @@ export const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../assets/image/BG.jpg')}
+        source={require('../assets/images/BG.jpg')}
         resizeMode="cover"
         style={styles.image}
       >

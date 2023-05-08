@@ -44,7 +44,7 @@ export const RegistrationScreen = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../assets/image/BG.jpg')}
+        source={require('../assets/images/BG.jpg')}
         resizeMode="cover"
         style={styles.image}
       >
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     gap: 16,
     backgroundColor: '#fff',
     height: 549,
-    width: 375,
+    width: '100%',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingHorizontal: 16,

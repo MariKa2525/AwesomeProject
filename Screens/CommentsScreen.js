@@ -33,7 +33,7 @@ export const CommentsScreen = () => {
             <View style={styles.commentitem}>
               <View style={styles.commentAvatarWrap}>
                 <Image
-                  source={require('../assets/image/User.png')}
+                  source={require('../assets/images/User.png')}
                   style={styles.commentAvatar}
                 />
               </View>
@@ -57,7 +57,7 @@ export const CommentsScreen = () => {
               </View>
               <View style={styles.commentAvatarWrap}>
                 <Image
-                  source={require('../assets/image/User.png')}
+                  source={require('../assets/images/User.png')}
                   style={styles.commentAvatar}
                 />
               </View>
@@ -65,7 +65,7 @@ export const CommentsScreen = () => {
             <View style={styles.commentitem}>
               <View style={styles.commentAvatarWrap}>
                 <Image
-                  source={require('../assets/image/User.png')}
+                  source={require('../assets/images/User.png')}
                   style={styles.commentAvatar}
                 />
               </View>
