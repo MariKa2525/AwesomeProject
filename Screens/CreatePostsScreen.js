@@ -52,13 +52,13 @@ export const CreatPostsScreen = () => {
       <View style={styles.wrapAvatar}>
         <View style={styles.wrapAvatarBox}>
           <Camera style={styles.camera} ref={setCamera}>
-            {photo && (
+            {photo ? (
               <View style={styles.wrapAvatarFoto}>
                 <Image source={{ uri: photo }} style={styles.wrapAvatarCamera}>
                   <Entypo name="camera" size={24} color="#BDBDBD" />
                 </Image>
               </View>
-            )}
+            ) : null}
             <TouchableOpacity
               style={styles.wrapAvatarCamera}
               onPress={takePhoto}

@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     letterSpacing: 0.01,
-    textAlign: 'start',
+    textAlign: 'left',
     fontFamily: 'RobotoMedium',
   },
   cardInner: {

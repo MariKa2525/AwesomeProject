@@ -11,7 +11,7 @@ import { PostsScreen } from './Screens/PostsScreen'
 import { CreatPostsScreen } from './Screens/CreatePostsScreen'
 import { ProfileScreen } from './Screens/ProfileScreen'
 import { CommentsScreen } from './Screens/CommentsScreen'
-
+import { MapScreen } from './Screens/MapScreen'
 const MainStack = createStackNavigator()
 
 export default function App() {
@@ -46,6 +46,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
+          <MainStack.Screen name="MapScreen" component={MapScreen} />
         </MainStack.Navigator>
       </NavigationContainer>
     </View>

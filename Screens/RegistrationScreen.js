@@ -168,15 +168,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
     color: '#212121',
     fontSize: 16,
-    focus: {
-      color: '#FF6C00',
-    },
-    hover: {
-      color: '#FF6C00',
-    },
-    active: {
-      color: '#FF6C00',
-    },
   },
   textInput: {
     position: 'absolute',

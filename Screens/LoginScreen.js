@@ -29,7 +29,7 @@ export const LoginScreen = () => {
     console.log('Credentials', `${email} + ${pass}`)
     setEmail('')
     setPass('')
-    navigation.navigate('Home')
+    navigation.navigate('Номе')
   }
 
   if (!fontsLoaded) {
@@ -37,9 +37,7 @@ export const LoginScreen = () => {
   }
 
   return (
-    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
-      {/* <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}> */}
       <ImageBackground
         source={require('../assets/images/BG.jpg')}
         style={styles.imageBg}
@@ -80,9 +78,7 @@ export const LoginScreen = () => {
           </Text>
         </View>
       </ImageBackground>
-      {/* </KeyboardAvoidingView>                 */}
     </View>
-    // </TouchableWithoutFeedback>
   )
 }
 

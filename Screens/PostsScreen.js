@@ -118,8 +118,6 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   cardImage: {
     width: 343,
@@ -141,8 +139,6 @@ const styles = StyleSheet.create({
   },
   cardInner: {
     display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     flexDirection: 'row',
     marginTop: 8,
   },
@@ -163,7 +159,6 @@ const styles = StyleSheet.create({
     marginLeft: 90,
     marginRight: 16,
     marginStart: 16,
-    // justifyContent: 'flex-end',
   },
   cardNumber: {
     fontSize: 16,
