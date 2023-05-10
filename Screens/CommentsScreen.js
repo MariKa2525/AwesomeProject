@@ -8,17 +8,8 @@ import {
   Keyboard,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
 
 export const CommentsScreen = () => {
-  const [fonts] = useFonts({
-    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
-  })
-
-  if (!fonts) {
-    return null
-  }
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -93,7 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
   },
   commentWrap: {
     display: 'flex',
@@ -148,12 +139,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   commentText: {
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     fontSize: 13,
     lineHeight: 18,
   },
   commentData: {
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     fontSize: 10,
     lineHeight: 12,
     textAlign: 'right',

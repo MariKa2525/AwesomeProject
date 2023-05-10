@@ -1,60 +1,43 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import 'react-native-gesture-handler'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { StatusBar } from 'expo-status-bar'
+import { useFonts } from 'expo-font'
+
 import { StyleSheet, View } from 'react-native'
-import { RegistrationScreen } from './Screens/RegistrationScreen'
-import { LoginScreen } from './Screens/LoginScreen'
 import { Home } from './Screens/Home'
-import { PostsScreen } from './Screens/PostsScreen'
-import { CreatPostsScreen } from './Screens/CreatePostsScreen'
-import { ProfileScreen } from './Screens/ProfileScreen'
-import { CommentsScreen } from './Screens/CommentsScreen'
-import { MapScreen } from './Screens/MapScreen'
-const MainStack = createStackNavigator()
+
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { store, persistor } from './redux/store'
+
+// SplashScreen.preventAutoHideAsync()
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+  })
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync()
+  //   }
+  // }, [fontsLoaded])
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <MainStack.Navigator initialRouteName="RegistrationScreen">
-          <MainStack.Screen
-            name="RegistrationScreen"
-            component={RegistrationScreen}
-            options={{ headerShown: false }}
-          />
-          <MainStack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <MainStack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <MainStack.Screen name="PostsScreen" component={PostsScreen} />
-          <MainStack.Screen
-            name="CreatPostsScreen"
-            component={CreatPostsScreen}
-          />
-          <MainStack.Screen
-            name="ProfileScreen"
-            component={ProfileScreen}
-            options={{ headerShown: false }}
-          />
-          <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
-          <MainStack.Screen name="MapScreen" component={MapScreen} />
-        </MainStack.Navigator>
-      </NavigationContainer>
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Home />
+      </PersistGate>
+    </Provider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+// })

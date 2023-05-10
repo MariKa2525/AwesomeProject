@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -12,33 +12,26 @@ import {
   Platform,
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { register } from '../redux/auth/authOperations'
+
+const initialState = {
+  login: '',
+  email: '',
+  password: '',
+}
 
 export const RegistrationScreen = () => {
   const navigation = useNavigation()
-  const [login, setLogin] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
-  const [fonts] = useFonts({
-    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
-  })
+  const [state, setstate] = useState(initialState)
 
-  const onLogin = () => {
-    console.log(`${login} + ${email} + ${password}`)
-    resetForm()
-  }
-
-  const resetForm = () => {
-    setLogin('')
-    setEmail('')
-    setPassword('')
-  }
-
-  if (!fonts) {
-    return null
+  const handleSubmit = () => {
+    dispatch(register(state))
+    setstate(initialState)
+    console.log('click1', state)
   }
 
   return (
@@ -63,14 +56,18 @@ export const RegistrationScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Логін"
-              value={login}
-              onChangeText={setLogin}
+              value={state.login}
+              onChangeText={(value) =>
+                setstate((prevState) => ({ ...prevState, login: value }))
+              }
             />
             <TextInput
               style={styles.input}
               placeholder="Адреса електронної пошти"
-              value={email}
-              onChangeText={setEmail}
+              value={state.email}
+              onChangeText={(value) =>
+                setstate((prevState) => ({ ...prevState, email: value }))
+              }
               autoComplete="email"
             />
             <KeyboardAvoidingView
@@ -80,8 +77,10 @@ export const RegistrationScreen = () => {
                 <TextInput
                   style={styles.input}
                   placeholder="Пароль"
-                  value={password}
-                  onChangeText={setPassword}
+                  value={state.password}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, password: value }))
+                  }
                   autoComplete="password"
                 />
 
@@ -91,13 +90,13 @@ export const RegistrationScreen = () => {
             <TouchableOpacity
               style={styles.button}
               title="Зареєструватись"
-              onPress={onLogin}
+              onPress={handleSubmit}
             >
               <Text style={styles.buttonText}> Зареєструватись </Text>
             </TouchableOpacity>
             <Text
               style={styles.textYes}
-              onPress={() => navigation.navigate('LoginScreen')}
+              onPress={() => navigation.navigate('Login')}
             >
               Вже існує акаунт? Ввійти
             </Text>
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     letterSpacing: 0.01,
     textAlign: 'center',
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
   },
   form: {
     paddingHorizontal: 16,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFonts } from 'expo-font'
+
 import { AntDesign } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { StyleSheet, View, Text } from 'react-native-web'
@@ -7,14 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 
 export const Header = ({ title }) => {
   const navigation = useNavigation()
-  const [fontsLoaded] = useFonts({
-    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
-  })
-
-  if (!fontsLoaded) {
-    return null
-  }
 
   return (
     <View style={styles.container}>
@@ -33,7 +25,7 @@ export const Header = ({ title }) => {
         size={24}
         color="black"
         backgroundColor="transparent"
-        onPress={() => navigation.navigate('LoginScreen')}
+        onPress={() => navigation.navigate('Login')}
       />
     </View>
   )
@@ -53,7 +45,7 @@ const styles = StyleSheet.create({
     backdropFilter: 'blur(13.5914)',
   },
   titleHeader: {
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
     fontSize: 17,
     lineHeight: 22,
     color: '#212121',

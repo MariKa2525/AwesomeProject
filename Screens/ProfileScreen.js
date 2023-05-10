@@ -16,18 +16,9 @@ import { AntDesign } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { SimpleLineIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { useFonts } from 'expo-font'
 
 export const ProfileScreen = () => {
   const navigation = useNavigation()
-  const [fonts] = useFonts({
-    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
-  })
-
-  if (!fonts) {
-    return null
-  }
 
   return (
     <View style={styles.container}>
@@ -52,7 +43,7 @@ export const ProfileScreen = () => {
                 name="exit-outline"
                 size={24}
                 color="#BDBDBD"
-                onPress={() => navigation.navigate('LoginScreen')}
+                onPress={() => navigation.navigate('Login')}
               />
             </View>
             <Text style={styles.title}>Natali Romanova</Text>
@@ -73,7 +64,7 @@ export const ProfileScreen = () => {
                     name="chatbubble"
                     size={24}
                     color="#FF6C00"
-                    onPress={() => navigation.navigate('CommentsScreen')}
+                    onPress={() => navigation.navigate('Comments')}
                   />
                   <Text style={styles.cardNumber}>8</Text>
                 </View>
@@ -107,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 10,
@@ -146,7 +137,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     letterSpacing: 0.01,
     textAlign: 'center',
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
   },
   wrap: {
     // marginTop: 33,
@@ -181,7 +172,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     letterSpacing: 0.01,
     textAlign: 'left',
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
   },
   cardInner: {
     display: 'flex',
@@ -213,12 +204,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     letterSpacing: 0.01,
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
   },
   cardLink: {
     fontSize: 16,
     lineHeight: 19,
     letterSpacing: 0.01,
-    fontFamily: 'RobotoMedium',
+    fontFamily: 'Roboto-Medium',
   },
 })

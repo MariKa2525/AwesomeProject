@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useFonts } from 'expo-font'
+
 import { StyleSheet, View, Text, TextInput } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
@@ -29,22 +29,13 @@ export const CreatPostsScreen = () => {
 
   const sendPhoto = () => {
     console.log('navigation', navigation)
-    navigation.navigate('PostsScreen', {
+    navigation.navigate('DefaultScreen', {
       photo,
       location,
       state,
     })
     setState(initialState)
     setPhoto('')
-  }
-
-  const [fontsLoaded] = useFonts({
-    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
-  })
-
-  if (!fontsLoaded) {
-    return null
   }
 
   return (
@@ -74,7 +65,7 @@ export const CreatPostsScreen = () => {
           <TextInput
             style={styles.input}
             placeholder="Назва..."
-            autoComplete="namefoto"
+            // autoComplete="namefoto"
             value={state.name}
             onChangeText={(value) =>
               setState((prevState) => ({ ...prevState, name: value }))
@@ -87,7 +78,7 @@ export const CreatPostsScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Локація..."
-              autoComplete="location"
+              // autoComplete="location"
               value={state.place}
               onChangeText={(value) =>
                 setState((prevState) => ({ ...prevState, place: value }))
@@ -156,14 +147,14 @@ const styles = StyleSheet.create({
     height: 60,
     top: 90,
     left: 142,
-    borderRadius: '50%',
+    borderRadius: 50,
   },
   paragraf: {
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     fontSize: 16,
     lineHeight: 19,
     color: '#BDBDBD',
-    textAlign: 'start',
+    textAlign: 'left',
   },
   wrapAvatarForm: {
     display: 'flex',
@@ -177,7 +168,7 @@ const styles = StyleSheet.create({
     // borderBottom: '1 solid #E8E8E8',
     borderBottomWidth: 1,
     borderBottomColor: '#E8E8E8',
-    fontFamily: 'RobotoRegular',
+    fontFamily: 'Roboto-Regular',
     fontSize: 16,
     lineHeight: 19,
     color: '#BDBDBD',
