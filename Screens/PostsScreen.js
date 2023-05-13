@@ -3,7 +3,7 @@ import { moduleName } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { DefaultPostsScreen } from './DefaultPostsScreen'
 import { CommentsScreen } from './CommentsScreen'
-// import { MapScreen } from './MapScreen'
+import { MapScreen } from './MapScreen'
 import { Ionicons, EvilIcons, Feather } from '@expo/vector-icons'
 import {
   StyleSheet,
@@ -58,7 +58,7 @@ export const PostsScreen = () => {
           headerStyle: styles.buttomBorder,
         })}
       />
-      {/* <NestedScreen.Screen name="Map" component={MapScreen} /> */}
+      <NestedScreen.Screen name="Map" component={MapScreen} />
     </NestedScreen.Navigator>
   )
 }
