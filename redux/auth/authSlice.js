@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
-import { register, login, logout, refresh } from './authOperations'
+import { register, login, authSignOutUser, refresh } from './authOperations'
 
 const initialState = {
   userId: '',
@@ -65,7 +65,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(logout.fulfilled, handleLogoutFulfilled)
+      .addCase(authSignOutUser.fulfilled, handleLogoutFulfilled)
       .addCase(refresh.pending, handlePendingRefreshing)
       .addCase(refresh.fulfilled, handleUserFulfilledRefreshing)
       .addCase(refresh.rejected, handleRejectedRefreshing)

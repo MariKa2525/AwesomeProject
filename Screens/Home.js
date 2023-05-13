@@ -1,26 +1,24 @@
 import React from 'react'
-
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
 const AuthStack = createStackNavigator()
 const MainTab = createBottomTabNavigator()
 import { NavigationContainer } from '@react-navigation/native'
 import { LoginScreen } from './LoginScreen'
 import { RegistrationScreen } from './RegistrationScreen'
 import { PostsScreen } from './PostsScreen'
-import { CreatPostsScreen } from './CreatePostsScreen'
+import { CreatePostsScreen } from './CreatePostsScreen'
 import { ProfileScreen } from './ProfileScreen'
 import { Header } from '../Components/Header'
 import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { selectIsLogIn, selectRefresh } from '../redux/auth/authSelectors'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { AntDesign } from '@expo/vector-icons'
 
 export const Home = () => {
   const isAuth = useSelector(selectIsLogIn)
-  const dispatch = useDispatch()
 
   return (
     <NavigationContainer>
@@ -36,26 +34,26 @@ export const Home = () => {
                     color="rgba(33, 33, 33, 0.8)"
                   />
                 )
-              } else if (route.name === 'CreatPosts') {
+              } else if (route.name === 'CreatePosts') {
                 return (
-                  <Ionicons
-                    name="add"
-                    size={size}
-                    color="#FFFFFF"
-                    style={styles.addPost}
-                  />
+                  <View style={styles.iconWrap}>
+                    <Ionicons
+                      name="add"
+                      size={size}
+                      color="#FFFFFF"
+                      style={styles.addPost}
+                    />
+                  </View>
                 )
               } else if (route.name === 'Profile') {
                 return <Feather name="user" size={size} color={color} />
               }
             },
+            tabBarActiveTintColor: '#FF6C00',
+            tabBarInactiveTintColor: 'rgba(33, 33, 33, 0.8)',
+            tabBarShowLabel: false,
+            initialRouteName: 'PostsScreen',
           })}
-          tabBarOptions={{
-            activeTintColor: '#FF6C00',
-            inactiveTintColor: 'rgba(33, 33, 33, 0.8)',
-            showLabel: false,
-            initialRouteName: 'Posts',
-          }}
         >
           <MainTab.Screen
             name="Posts"
@@ -65,12 +63,28 @@ export const Home = () => {
             }}
           />
           <MainTab.Screen
-            name="CreatPosts"
-            component={CreatPostsScreen}
-            options={{
+            name="CreatePosts"
+            component={CreatePostsScreen}
+            options={({ navigation }) => ({
               headerShown: true,
-              header: ({ navigation, route }) => <Header title={route.name} />,
-            }}
+              headerTitleAlign: 'center',
+              headerStyle: styles.bottomBorder,
+
+              headerLeft: () => (
+                <TouchableOpacity
+                  style={{ marginLeft: 16 }}
+                  onPress={() => navigation.navigate('Home')}
+                >
+                  <AntDesign
+                    name="arrowleft"
+                    size={24}
+                    color="#212121"
+                    backgroundColor={'transparent'}
+                    onPress={() => navigation.navigate('Home')}
+                  />
+                </TouchableOpacity>
+              ),
+            })}
           />
           <MainTab.Screen
             name="Profile"
@@ -100,7 +114,7 @@ export const Home = () => {
 }
 
 const styles = StyleSheet.create({
-  addPost: {
+  iconWrap: {
     textAlign: 'center',
     alignItems: 'center',
     display: 'flex',
@@ -109,5 +123,10 @@ const styles = StyleSheet.create({
     width: 70,
     height: 40,
     borderRadius: 20,
+  },
+  addPost: {},
+  bottomBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#b3b3b3',
   },
 })

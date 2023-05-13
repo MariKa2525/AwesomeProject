@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -10,32 +10,57 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
-  Platform,
+  FlatList,
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
-import { SimpleLineIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db, auth } from '../firebase/config'
+import { selectName } from '../redux/auth/authSelectors'
+import { useSelector, useDispatch } from 'react-redux'
+import PostComponent from '../Components/PostComponent'
+import { authSignOutUser } from '../redux/auth/authOperations'
 
 export const ProfileScreen = () => {
   const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const [userPosts, setUserPosts] = useState([])
+  const userName = useSelector(selectName)
+
+  useEffect(() => {
+    getUserPosts()
+  }, [])
+
+  const getUserPosts = async () => {
+    onSnapshot(collection(db, 'posts'), (snapshot) => {
+      const posts = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+      setUserPosts(posts)
+    })
+  }
+
+  const signOut = () => {
+    dispatch(authSignOutUser())
+  }
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/images/BG.jpg')}
         resizeMode="cover"
-        style={styles.image}
+        style={styles.backgroundImage}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.wrap}>
             <View style={styles.wrapImage}>
               <AntDesign
-                name="pluscircleo"
+                name="closecircleo"
+                style={styles.closecircleoIcon}
                 size={25}
-                color="#FF6C00"
-                backgroundColor="white"
-                style={styles.buttonAddPhoto}
+                color="#E8E8E8"
               />
             </View>
             <View style={styles.wrapIonicons}>
@@ -43,50 +68,24 @@ export const ProfileScreen = () => {
                 name="exit-outline"
                 size={24}
                 color="#BDBDBD"
-                onPress={() => navigation.navigate('Login')}
+                onPress={signOut}
               />
             </View>
-            <Text style={styles.title}>Natali Romanova</Text>
+            <Text style={styles.title}>{userName}</Text>
 
-            <View style={styles.card}>
-              <View style={styles.cardImageWrap}>
-                <Image
-                  source={{ uri: 'https://reactjs.org/logo-og.png' }}
-                  style={styles.cardImage}
+            <FlatList
+              data={userPosts}
+              style={styles.postsList}
+              keyExtractor={(__, index) => index.toString()}
+              renderItem={({ item, index }) => (
+                <PostComponent
+                  post={item}
+                  navigation={navigation}
+                  isLastItem={index === userPosts.length - 1}
+                  forProfileScreen
                 />
-              </View>
-              <View style={styles.cardTextwrap}>
-                <Text style={styles.cardText}>Лic</Text>
-              </View>
-              <View style={styles.cardInner}>
-                <View style={styles.cardWrapper}>
-                  <Ionicons
-                    name="chatbubble"
-                    size={24}
-                    color="#FF6C00"
-                    onPress={() => navigation.navigate('Comments')}
-                  />
-                  <Text style={styles.cardNumber}>8</Text>
-                </View>
-                <View style={styles.cardWrapper}>
-                  <AntDesign name="like2" size={24} color="#FF6C00" />
-                  <Text style={styles.cardNumber}>153</Text>
-                </View>
-                <View style={styles.cardWrapperMap}>
-                  <SimpleLineIcons
-                    name="location-pin"
-                    size={24}
-                    color="black"
-                  />
-                  <Text
-                    style={styles.cardLink}
-                    onPress={() => navigation.navigate('MapScreen')}
-                  >
-                    Ukraine
-                  </Text>
-                </View>
-              </View>
-            </View>
+              )}
+            />
           </View>
         </TouchableWithoutFeedback>
       </ImageBackground>
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
   },
-  image: {
+  backgroundImage: {
     width: 400,
     height: 812,
     resizeMode: 'contain',
@@ -119,6 +118,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     top: -60,
     left: 141,
+  },
+  closecircleoIcon: {
+    backgroundColor: '#fff',
+    position: 'absolute',
+    left: 108,
+    top: 80,
+    borderRadius: 25,
   },
   buttonAddPhoto: {
     position: 'absolute',
@@ -140,7 +146,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Medium',
   },
   wrap: {
-    // marginTop: 33,
     display: 'flex',
     gap: 16,
     backgroundColor: '#fff',
@@ -151,65 +156,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
-  card: {
-    flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  cardImage: {
-    width: 343,
-    height: 240,
-  },
-  cardImageWrap: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cardText: {
-    marginTop: 8,
-    marginStart: 16,
-    fontSize: 16,
-    lineHeight: 19,
-    letterSpacing: 0.01,
-    textAlign: 'left',
-    fontFamily: 'Roboto-Medium',
-  },
-  cardInner: {
-    display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    flexDirection: 'row',
-    marginTop: 8,
-  },
-  cardWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 8,
-    alignItems: 'center',
-    marginRight: 24,
-    marginStart: 16,
-    justifyContent: 'flex-start',
-  },
-  cardWrapperMap: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 4,
-    alignItems: 'center',
-    marginLeft: 90,
-    marginRight: 16,
-    marginStart: 16,
-    // justifyContent: 'flex-end',
-  },
-  cardNumber: {
-    fontSize: 16,
-    lineHeight: 19,
-    letterSpacing: 0.01,
-    fontFamily: 'Roboto-Medium',
-  },
-  cardLink: {
-    fontSize: 16,
-    lineHeight: 19,
-    letterSpacing: 0.01,
-    fontFamily: 'Roboto-Medium',
+
+  postsList: {
+    marginHorizontal: 8,
+    height: '50%',
   },
 })

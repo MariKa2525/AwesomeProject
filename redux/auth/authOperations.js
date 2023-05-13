@@ -17,7 +17,7 @@ export const register = createAsyncThunk(
       const user = res.user
       await updateProfile(user, {
         displayName: login,
-        photoURL: 'https://i.pravatar.cc/300',
+        photoURL: '../assets/images/User.png',
       })
       return {
         userId: user.uid,
@@ -49,14 +49,17 @@ export const login = createAsyncThunk(
   },
 )
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  try {
-    await signOut(auth)
-    return
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message)
-  }
-})
+export const authSignOutUser = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await signOut(auth)
+      return
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  },
+)
 
 export const refresh = createAsyncThunk(
   'auth/refresh',
@@ -71,7 +74,7 @@ export const refresh = createAsyncThunk(
               name: user.displayName,
               email: user.email,
               photo: user.photoURL,
-              isLoggedIn: true,
+              isLogIn: true,
             }),
           )
         } else {
@@ -82,7 +85,7 @@ export const refresh = createAsyncThunk(
               name: '',
               email: '',
               photo: '',
-              isLoggedIn: false,
+              isLogIn: false,
             }),
           )
         }

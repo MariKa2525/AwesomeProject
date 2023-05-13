@@ -4,10 +4,16 @@ import { AntDesign } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { StyleSheet, View, Text } from 'react-native-web'
 import { useNavigation } from '@react-navigation/native'
+import { authSignOutUser } from '../redux/auth/authOperations'
+import { useDispatch } from 'react-redux'
 
 export const Header = ({ title }) => {
   const navigation = useNavigation()
-
+  const dispatch = useDispatch()
+  // Submit
+  const handleSubmit = () => {
+    dispatch(authSignOutUser())
+  }
   return (
     <View style={styles.container}>
       <AntDesign
@@ -25,7 +31,7 @@ export const Header = ({ title }) => {
         size={24}
         color="black"
         backgroundColor="transparent"
-        onPress={() => navigation.navigate('Login')}
+        onPress={handleSubmit}
       />
     </View>
   )

@@ -9,8 +9,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
-  Platform,
+
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
