@@ -141,7 +141,7 @@ export const CreatePostsScreen = () => {
           </View>
         ) : (
           <View style={styles.wrapAvatarFoto}>
-            {/* <Camera style={styles.camera} ref={setCamera} type={cameraType}>
+            <Camera style={styles.camera} ref={setCamera} type={cameraType}>
               <TouchableOpacity style={styles.iconWrap} onPress={takePhoto}>
                 <Feather name="camera" size={20} color="#BDBDBD" />
               </TouchableOpacity>
@@ -155,7 +155,7 @@ export const CreatePostsScreen = () => {
                   color="#BDBDBD"
                 />
               </TouchableOpacity>
-            </Camera> */}
+            </Camera>
           </View>
         )}
 
