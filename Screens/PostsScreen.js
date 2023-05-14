@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { DefaultPostsScreen } from './DefaultPostsScreen'
 import { CommentsScreen } from './CommentsScreen'
 import { MapScreen } from './MapScreen'
-import { Ionicons, EvilIcons, Feather } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import {
   StyleSheet,
   View,
