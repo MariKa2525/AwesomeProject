@@ -9,7 +9,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
@@ -22,15 +21,14 @@ const initialState = {
 
 export const LoginScreen = () => {
   const navigation = useNavigation()
+  const dispatch = useDispatch()
 
   const [state, setstate] = useState(initialState)
-  const dispatch = useDispatch()
+  const [isShowPassword, setIsShowPassword] = useState(false)
 
   const handleSubmit = () => {
     setstate(initialState)
     dispatch(login(state))
-
-    console.log('click', state)
   }
 
   return (
@@ -63,8 +61,23 @@ export const LoginScreen = () => {
               onChangeText={(value) =>
                 setstate((prevState) => ({ ...prevState, password: value }))
               }
+              secureTextEntry={!isShowPassword}
             />
-            <Text style={styles.textInput}> Показати </Text>
+            {isShowPassword === true ? (
+              <Text
+                style={styles.textPass}
+                onPress={() => setIsShowPassword((prev) => !prev)}
+              >
+                Сховати
+              </Text>
+            ) : (
+              <Text
+                style={styles.textPass}
+                onPress={() => setIsShowPassword((prev) => !prev)}
+              >
+                Показати
+              </Text>
+            )}
           </View>
 
           <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
@@ -134,7 +147,7 @@ const styles = StyleSheet.create({
   pass: {
     position: 'relative',
   },
-  textInput: {
+  textPass: {
     position: 'absolute',
     right: 32,
     top: 16,

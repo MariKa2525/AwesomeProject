@@ -51,47 +51,47 @@ export const CommentsScreen = ({ route }) => {
   const getAllPosts = async () => {
     onSnapshot(collection(db, 'posts', postId, 'comments'), (querySnapshot) => {
       const commentsArray = querySnapshot.docs
-
         .map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }))
         .sort((a, b) => a.date.seconds - b.date.seconds)
-
       setAllComments(commentsArray)
     })
   }
 
   return (
     <View style={styles.container}>
-      <Image style={styles.commentImage} source={{ uri: photo }} />
+      <View style={styles.commentsWrapper}>
+        <Image style={styles.commentImage} source={{ uri: photo }} />
 
-      <FlatList
-        data={allComments}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <CommentComponent item={item} />}
-      />
-      <View>
-        <TextInput
-          placeholder="Comment..."
-          style={styles.commentInput}
-          value={comment}
-          onChangeText={(text) => setComment(text)}
+        <FlatList
+          data={allComments}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <CommentComponent item={item} />}
         />
-        <TouchableOpacity activeOpacity={0.8} style={styles.commentButton}>
-          <AntDesign
-            name="arrowup"
-            size={24}
-            color="#FFFFFF"
-            style={styles.commentIconArrowup}
-            opacity={0.6}
-            onPress={() => {
-              setComment('')
-              Keyboard.dismiss()
-              createPost()
-            }}
+        <View>
+          <TextInput
+            placeholder="Comment..."
+            style={styles.commentInput}
+            value={comment}
+            onChangeText={(text) => setComment(text)}
           />
-        </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.8} style={styles.commentButton}>
+            <AntDesign
+              name="arrowup"
+              size={24}
+              color="#FFFFFF"
+              style={styles.commentIconArrowup}
+              opacity={0.6}
+              onPress={() => {
+                setComment('')
+                Keyboard.dismiss()
+                createPost()
+              }}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -100,12 +100,15 @@ export const CommentsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 32,
-    marginBottom: 16,
-    marginHorizontal: 16,
+
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     fontFamily: 'Roboto-Regular',
+  },
+  commentsWrapper: {
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 16,
   },
   commentImage: {
     width: 343,

@@ -27,11 +27,11 @@ export const RegistrationScreen = () => {
   const dispatch = useDispatch()
 
   const [state, setstate] = useState(initialState)
+  const [isShowPassword, setIsShowPassword] = useState(false)
 
   const handleSubmit = () => {
     dispatch(register(state))
     setstate(initialState)
-    console.log('click1', state)
   }
 
   return (
@@ -82,9 +82,23 @@ export const RegistrationScreen = () => {
                     setstate((prevState) => ({ ...prevState, password: value }))
                   }
                   autoComplete="password"
+                  secureTextEntry={!isShowPassword}
                 />
-
-                <Text style={styles.textInput}> Показати </Text>
+                {isShowPassword === true ? (
+                  <Text
+                    style={styles.textPass}
+                    onPress={() => setIsShowPassword((prev) => !prev)}
+                  >
+                    Сховати
+                  </Text>
+                ) : (
+                  <Text
+                    style={styles.textPass}
+                    onPress={() => setIsShowPassword((prev) => !prev)}
+                  >
+                    Показати
+                  </Text>
+                )}
               </View>
             </KeyboardAvoidingView>
             <TouchableOpacity
@@ -168,7 +182,7 @@ const styles = StyleSheet.create({
     color: '#212121',
     fontSize: 16,
   },
-  textInput: {
+  textPass: {
     position: 'absolute',
     right: 32,
     top: 16,
